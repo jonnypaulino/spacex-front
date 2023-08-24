@@ -1,10 +1,20 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SpacexController } from "../sdk/controller";
 
 export const SpacexState = () => {
+    const [page, setPage] = useState(1)
+    const [nameFilter, setNameFilter] = useState("");
 
-    const { allLaunches } = SpacexController();
+    const toast = useRef(null);
 
+    
+    const show = () => {
+        toast.current.show({ severity: 'info', summary: 'Info', detail: 'Message Content' });
+    };
+    
+
+   
+    const { allLaunches, refetch } = SpacexController(page, nameFilter);
 
     const [launches, setLaunches] = useState();
 
@@ -16,6 +26,6 @@ export const SpacexState = () => {
 
 
     return {
-        launches
+        launches, page, setPage, nameFilter, setNameFilter, refetch, show, toast
     }
 }

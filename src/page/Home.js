@@ -2,25 +2,28 @@ import React, { useContext } from "react";
 import Table from "../components/Table";
 import { Container } from "./style";
 import { SpacexContext } from "../context/context";
+import { Toast } from "primereact/toast";
 
 const Home = () => {
 
-    const { launches } = useContext(SpacexContext)
+    const { launches, toast } = useContext(SpacexContext)
 
     const columns = [
-        {field: 'name', header: 'Nome' },
+        { field: 'flight_number', header: 'Nº Vôo' },
+        { field: 'name', header: 'Nome' },
     ];
 
-    if(!launches) return null
+    if (!launches) return null
 
-    console.log(launches)
 
 
     return (
-        <Container>            
+        <Container>
             {
-                launches ? <Table columns={columns} list={launches.data.results} /> : null
+                launches ? <Table columns={columns} list={launches} /> : null
             }
+            <Toast ref={toast} />
+
         </Container>
     )
 }

@@ -1,40 +1,44 @@
-import React, { useState } from "react";
+import _debounce from 'lodash/debounce';
+import React, { useContext } from "react";
+import { SpacexContext } from "../../context/context";
 import { Column, Padding, Row } from "../../styles/styles";
 import Input from "../../ui/Input";
-import ButtonPrime from "../../ui/Button";
 import TablePrime from "../../ui/Table";
 
-const Table = ({columns, list, name, pathEdit, delet}) => {
+const Table = ({ columns, list, name, pathEdit, delet }) => {
 
-    const [nameFilter, setNameFilter] = useState("");
+    const { nameFilter, setNameFilter, refetch } = useContext(SpacexContext);
 
-    const larguraTela = window.innerWidth;
+    const debouncedSearch = _debounce((text) => {
+        setNameFilter(text)
+        refetch()
+    }, 100);
 
+    const handleSearchChange = (event) => {
+        const searchText = event.target.value;
+        debouncedSearch(searchText);
+    };
 
     const header = (
         <Row id="end">
-                <div className="p-inputgroup" style={{width: larguraTela < 700 ? "60%" : "30%"}}>
-                    <span className="p-inputgroup-addon">
-                        <i className="pi pi-search"></i>
-                    </span>
-                    <Input placeholder={name} value={nameFilter} onChange={(e) => setNameFilter(e.target.value)} />
-                </div>
-                <ButtonPrime label={"buscar"} />
+            <span className="p-input-icon-left">
+                <i className="pi pi-search" />
+                <Input placeholder={name} value={nameFilter} onChange={handleSearchChange} />
+            </span>
+            <Padding padding="8px" />
         </Row>
     );
 
-    const filterName = nameFilter !== "" ? list.filter(filt => filt?.nome?.toLowerCase()?.includes(nameFilter) || filt?.servico?.toLowerCase()?.includes(nameFilter)) : list
-
-    return(
-            <Column>
-                    <h1>
-                        {name}
-                    </h1>
-                    <Padding padding="16px 0">
-                        <TablePrime columns={columns} products={filterName} header={header}  pathEdit={pathEdit} delet={delet}/>
-                    </Padding>
-                    <Padding />
-            </Column>
+    return (
+        <Column>
+            <h1>
+                {name}
+            </h1>
+            <Padding padding="16px 0">
+                <TablePrime columns={columns} allGet={list} products={list.data.results} header={header} pathEdit={pathEdit} delet={delet} />
+            </Padding>
+            <Padding />
+        </Column>
     )
 }
 

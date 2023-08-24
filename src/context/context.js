@@ -5,9 +5,9 @@ export const SpacexContext = createContext({});
 
 const SpacexProvider = ({children}) => {
 
-    const { launches } = SpacexState();
+    const { launches, page, setPage, nameFilter, setNameFilter, refetch,show, toast } = SpacexState();
     return (
-        <SpacexContext.Provider value={{ launches }}>
+        <SpacexContext.Provider value={{ launches, page, setPage, nameFilter, setNameFilter,refetch, show, toast }}>
             {children}
         </SpacexContext.Provider>
     )
