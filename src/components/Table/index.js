@@ -21,9 +21,9 @@ const Table = ({ columns, list, name, pathEdit, delet }) => {
 
     const header = (
         <Row id="end">
-            <span className="p-input-icon-left">
-                <i className="pi pi-search" />
+            <span className="p-input-icon-right">
                 <Input placeholder={name} value={nameFilter} onChange={handleSearchChange} />
+                <i className="pi pi-search" />
             </span>
             <Padding padding="8px" />
         </Row>
