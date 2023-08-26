@@ -13,7 +13,7 @@ import { Sucess } from './style';
 const TablePrime = ({ products, columns, header, pathEdit, delet, allGet }) => {
     const { page, setPage } = useContext(SpacexContext)
     
-    const pages = Math.ceil(allGet.data.totalDocs / 4);
+    const pages = Math.ceil(allGet.data.totalDocs / 5);
 
     const actionBodyTemplate = (rowData) => {
         return (
@@ -63,7 +63,7 @@ const TablePrime = ({ products, columns, header, pathEdit, delet, allGet }) => {
                 <Column align='center' body={actionBodyTemplate} header={"Video"} exportable={false} style={{ minWidth: '12rem' }}></Column>
             </DataTable>
 
-            <PaginatorSpace first={page - 1} onPageChange={(e) => setPage(e.first + 1)} totalRecords={pages} rows={4} />
+            <PaginatorSpace first={page - 1} onPageChange={(e) => setPage(e.first + 1)} totalRecords={pages} rows={5} />
         </>
     )
 }

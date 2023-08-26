@@ -12,8 +12,8 @@ const Home = () => {
 
     const columns = [
         { field: 'flight_number', header: 'Nº Vôo' },
-        { field: 'name', header: 'Nome' },
-        { field: "associatedRocket.name", header: "fogute" }
+        { field: 'name', header: 'Missão' },
+        { field: "associatedRocket.name", header: "Foguete" }
     ];
 
     if (!launches) return null

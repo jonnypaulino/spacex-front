@@ -12,7 +12,6 @@ export const SpacexState = () => {
 
     const toast = useRef(null);
 
-
     const show = () => {
         toast.current.show({ severity: 'info', summary: 'Info', detail: 'Message Content' });
     };
@@ -84,11 +83,13 @@ export const SpacexState = () => {
             {
                 data: setDataLaunches(),
                 backgroundColor: [
-                    documentStyle.getPropertyValue('--green-500'),
+                    documentStyle.getPropertyValue('--orange-500'),
+                    documentStyle.getPropertyValue('--pink-500'),
                     documentStyle.getPropertyValue('--red-500'),
                 ],
                 hoverBackgroundColor: [
-                    documentStyle.getPropertyValue('--green-400'),
+                    documentStyle.getPropertyValue('--orange-400'),
+                    documentStyle.getPropertyValue('--pink-400'),
                     documentStyle.getPropertyValue('--red-400'),
                 ]
             }
